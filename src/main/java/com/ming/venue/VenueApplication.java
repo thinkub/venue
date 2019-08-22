@@ -1,20 +1,35 @@
 package com.ming.venue;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.ming.venue.entity.Member;
+import com.ming.venue.repository.MemberRepository;
+
 @EnableWebMvc
-@SpringBootApplication(scanBasePackages = {VenueApplication.BASE_PACKAGE},
-					   exclude = {DataSourceTransactionManagerAutoConfiguration.class, DataSourceAutoConfiguration.class})
+@SpringBootApplication(scanBasePackages = {VenueApplication.BASE_PACKAGE})
 @EnableJpaRepositories(value = VenueApplication.BASE_PACKAGE)
+@EntityScan(
+		basePackageClasses = {Jsr310JpaConverters.class},
+		basePackages = VenueApplication.BASE_PACKAGE + ".entity")
 public class VenueApplication {
 	public static final String BASE_PACKAGE = "com.ming.venue";
 
 	public static void main(String[] args) {
 		SpringApplication.run(VenueApplication.class, args);
+	}
+
+	@Bean
+	public CommandLineRunner initMember(MemberRepository memberRepository) {
+		return (args) ->
+			memberRepository.save(Member.init("thinkub", "thinkub1!"));
 	}
 }
