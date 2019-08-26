@@ -1,6 +1,8 @@
 package com.ming.venue.model.address;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -10,6 +12,14 @@ import com.ming.venue.util.BooleanYnSerializer;
 
 @NoArgsConstructor
 public class Document {
+	@JsonProperty(value = "address_name")
+	private String addressName;
+	@JsonProperty(value = "address_type")
+	private AddressType addressType;
+	@JsonProperty(value = "x")
+	private String x;
+	@JsonProperty(value = "y")
+	private String y;
 	@JsonProperty(value = "address")
 	private Address address;
 	@JsonProperty(value = "road_address")
@@ -75,5 +85,12 @@ public class Document {
 		private String x;
 		@JsonProperty(value = "y")
 		private String y;
+	}
+
+	@Getter
+	@AllArgsConstructor
+	public enum AddressType {
+		REGION, ROAD, REGION_ADDR, ROAD_ADDR;
+
 	}
 }
