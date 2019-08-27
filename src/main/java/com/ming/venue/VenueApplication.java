@@ -15,7 +15,7 @@ import com.ming.venue.repository.MemberRepository;
 
 @EnableWebMvc
 @SpringBootApplication(scanBasePackages = {VenueApplication.BASE_PACKAGE})
-@EnableJpaRepositories(value = VenueApplication.BASE_PACKAGE)
+@EnableJpaRepositories(value = VenueApplication.BASE_PACKAGE + ".repository")
 @EntityScan(
 		basePackageClasses = {Jsr310JpaConverters.class},
 		basePackages = VenueApplication.BASE_PACKAGE + ".entity")
@@ -29,7 +29,9 @@ public class VenueApplication {
 
 	@Bean
 	public CommandLineRunner initMember(MemberRepository memberRepository) {
+		Member member = Member.init("thinkub", "thinkub1!");
+		member.executePasswordEncrypt();
 		return (args) ->
-			memberRepository.save(Member.init("thinkub", "thinkub1!"));
+			memberRepository.save(member);
 	}
 }

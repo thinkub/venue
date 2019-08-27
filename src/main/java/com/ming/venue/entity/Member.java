@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,6 +23,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 public class Member {
+	private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 	@Id
 	@Column(name = "member_no")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,5 +44,9 @@ public class Member {
 	private Member(String memberId, String password) {
 		this.memberId = memberId;
 		this.password = password;
+	}
+
+	public void executePasswordEncrypt() {
+		this.password = passwordEncoder.encode(this.password);
 	}
 }
