@@ -5,13 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "member")
+@Table(name = "member", indexes = @Index(columnList = "member_id", unique = true))
 @AllArgsConstructor(staticName = "of")
+@NoArgsConstructor
+@Getter
 public class Member {
 	@Id
 	@Column(name = "member_no")
@@ -19,6 +24,7 @@ public class Member {
 	private int memberNo;
 
 	@Column(name = "member_id")
+
 	private String memberId;
 
 	@Column(name = "password")
