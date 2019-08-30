@@ -19,13 +19,12 @@ spring:
       ddl-auto: create-drop
     generate-ddl: true
 
-# jasypt encryptor
-#jasypt.encryptor.bean=jasyptStringEncrpto
-
 ---
 
 kakao:
   address:
     url: https://dapi.kakao.com
   appKey: KakaoAK 28cba50459be19a904d64abcf06292b9
+  map:
+    url: https://map.kakao.com/link/map/
 

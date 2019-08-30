@@ -26,7 +26,7 @@ public class KakaoAddressSearchClientTest {
 	@Test
 	public void getAddress() {
 		String query = "전북 삼성동 100";
-		KakaoAddressResponse response = client.getAddress(query);
+		KakaoAddressResponse response = client.getAddress(query, 0, 1);
 		log.info("{}", response);
 		assertThat(response, is(notNullValue()));
 	}

@@ -11,6 +11,7 @@ import com.ming.venue.util.BooleanYnDeserializer;
 import com.ming.venue.util.BooleanYnSerializer;
 
 @NoArgsConstructor
+@Getter
 public class Document {
 	@JsonProperty(value = "address_name")
 	private String addressName;
@@ -26,6 +27,7 @@ public class Document {
 	private RoadAddress roadAddress;
 
 	@NoArgsConstructor
+	@Getter
 	static class Address {
 		@JsonProperty(value = "address_name")
 		private String addressName;
@@ -58,6 +60,7 @@ public class Document {
 	}
 
 	@NoArgsConstructor
+	@Getter
 	static class RoadAddress {
 		@JsonProperty(value = "address_name")
 		private String addressName;
