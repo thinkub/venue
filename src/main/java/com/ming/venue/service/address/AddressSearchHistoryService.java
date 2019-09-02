@@ -56,7 +56,7 @@ public class AddressSearchHistoryService implements AddressSearchHistoryCommande
 	}
 
 	@Override
-	public List<AddressSearchHistory> findByMember(Member member) {
-		return addressSearchHistoryRepository.findByMember(member);
+	public List<AddressSearchHistory> findSortByMember(Member member) {
+		return addressSearchHistoryRepository.findByMemberOrderByRegisterDatetimeDesc(member);
 	}
 }

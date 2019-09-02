@@ -9,5 +9,5 @@ import com.ming.venue.entity.Member;
 
 public interface AddressSearchHistoryRepository extends JpaRepository<AddressSearchHistory, Integer> {
 	List<AddressSearchHistory> findByQueryStringEquals(String queryString);
-	List<AddressSearchHistory> findByMember(Member member);
+	List<AddressSearchHistory> findByMemberOrderByRegisterDatetimeDesc(Member member);
 }

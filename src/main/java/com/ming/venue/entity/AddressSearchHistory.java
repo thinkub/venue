@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "address_search_history", indexes = @Index(columnList = "member_id"))
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor
+@Getter
 public class AddressSearchHistory {
 	@Id
 	@Column(name = "address_search_history_id")
