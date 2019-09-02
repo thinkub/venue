@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import com.ming.venue.entity.Member;
+
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AddressDetailResponse {
@@ -17,8 +19,8 @@ public class AddressDetailResponse {
 	private String daumAddressUrl;
 
 	public static AddressDetailResponse from(Document document, String daumAddressUrl) {
-		Document.Address address = Optional.ofNullable(document.getAddress()).orElse(new Document.Address());
-		Document.RoadAddress roadAddress = Optional.ofNullable(document.getRoadAddress()).orElse(new Document.RoadAddress());
+		Document.Address address = Optional.ofNullable(document.getAddress()).orElseGet(Document.Address::new);
+		Document.RoadAddress roadAddress = Optional.ofNullable(document.getRoadAddress()).orElseGet(Document.RoadAddress::new);
 
 		return new AddressDetailResponse(address.getAddressName(),
 										 roadAddress.getAddressName(),
@@ -35,9 +37,10 @@ public class AddressDetailResponse {
 	public static class Search {
 		private String query;
 		private Pageable pageable;
+		private int memberNo;
 
-		public static Search from(String query, Pageable pageable) {
-			return new Search(query, pageable);
+		public static Search from(String query, Pageable pageable, Member member) {
+			return new Search(query, pageable, member.getMemberNo());
 		}
 	}
 }
