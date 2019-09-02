@@ -62,11 +62,10 @@ public class AddressSearchServiceTest {
 	@Test
 	public void 조회이력저장aop_test() {
 		// given
-
-		// when
 		Page<AddressDetailResponse> responses = addressQuerier.findAddressByQuery(search);
 		log.info("response: {}", responses);
 
+		// when
 		List<AddressSearchHistory> addressSearchHistorys = addressSearchHistoryQuerier.findByQueryString(search.getQuery());
 		log.info("response: {}", addressSearchHistorys);
 
